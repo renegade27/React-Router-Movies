@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       savedList: []
     };
@@ -22,7 +24,8 @@ export default class App extends Component {
     return (
       <div>
         <SavedList list={this.state.savedList} />
-        <div>Replace this Div with your Routes</div>
+        <Route exact path='/movielist' component={ MovieList } />
+        <Route path='/movielist/:id' render={(props) => <Movie url={props.history.location.pathname}/> } />
       </div>
     );
   }
